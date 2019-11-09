@@ -10,7 +10,7 @@ public class Drone {
 
     private int ID;
     private static int GeneralID = 0;
-    private int xPos, yPos;
+    public int xPos, yPos;
     private Direction dir;
 
     public static void main(String[] args) {
@@ -33,8 +33,6 @@ public class Drone {
      * @param y where the drone is along y axis
      */
     public Drone(int x, int y, Direction c) {
-        if(DroneArena.droneAL.size() == 0)
-            GeneralID = 0;
         ID = GeneralID + 1;
         GeneralID++;
         xPos = x;
@@ -57,14 +55,16 @@ public class Drone {
          * The new position is within the arena
          * There is not a Drone already there
          */
-
+        //System.out.println(xPos + "|" + yPos);
+        //System.out.println("Original Drone Stats: \n" + d.toString());
+        //System.out.println(DroneArena.xSize + " | " + DroneArena.ySize );
         int i = 0;
         do{
             i++;
             switch(dir)
             {
                 case NORTH:
-
+                    //System.out.println("Checking if drone can go " + dir + ".");
                     if(DroneArena.canMoveHere(xPos, yPos - 1) == true)
                     {
                         yPos = yPos - 1;
@@ -77,6 +77,7 @@ public class Drone {
                     }
 
                 case EAST:
+                    //System.out.println("Checking if drone can go " + dir + ".");
                     if(DroneArena.canMoveHere(xPos + 1 , yPos) == true)
                     {
                         xPos = xPos + 1;
@@ -89,6 +90,7 @@ public class Drone {
                     }
 
                 case SOUTH:
+                    //System.out.println("Checking if drone can go " + dir + ".");
                     if(DroneArena.canMoveHere(xPos, yPos + 1) == true)
                     {
                         yPos = yPos + 1;
@@ -101,6 +103,7 @@ public class Drone {
                     }
 
                 case WEST:
+                    //System.out.println("Checking if drone can go " + dir + ".");
                     if(DroneArena.canMoveHere(xPos -1 , yPos) == true) // Checks if current drone can move to new x and y pos.
                     {
                         xPos = xPos - 1;
@@ -115,6 +118,9 @@ public class Drone {
             }
         } while (i < 4 ); // Iterate 4 times due to 4 possibilities
 
+        //System.out.println("Current Drone Stats: \n" + d.toString());
+
+        //return d; // Will return d because it's of type drone
     }
 
     private void displayDrone(ConsoleCanvas c) {
